@@ -1,13 +1,17 @@
 package jpabook.jpashop.domain;
 
 import jpabook.jpashop.domain.item.Item;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Getter @Setter
+//기본생성자를 통한 객체생성 접근을 막는다.(나도 실제로 기본생성자 만들어서 코딩할뻔.. 유지보수에 좋다(통일성))
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem {
 
     @Id @GeneratedValue
