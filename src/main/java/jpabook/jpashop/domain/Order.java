@@ -31,7 +31,7 @@ public class Order {
     private LocalDateTime orderDate;    //주문 시간
 
     @Enumerated(EnumType.STRING)
-    private OrderStatus orderStatus;    //주문의 상태[ORDER, CANCEL]
+    private OrderStatus status;    //주문의 상태[ORDER, CANCEL]
 
     //==연관관계 메서드==//
     public void setMember(Member member) {
@@ -48,14 +48,48 @@ public class Order {
     }
 
 
+    //==생성 메서드==//
+    /**
+     * ...문법 : 가변인자를 사용하여 파라미터를 동적으로 받을  수 있다.
+     */
+    public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems){
+        Order order = new Order();
+        order.setMember(member);
+        order.setDelivery(delivery);
+        for(OrderItem orderItem: orderItems){
+            order.addOrderItem(orderItem);
+        }
+        order.setStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
+        return order;
+    }
 
+    //==비즈니스 로직==//
+    /**
+     * 주문 취소
+     */
+    public void cancel(){
+        if (this.delivery.getStatus() == DeliveryStatus.COMP){
+            throw new IllegalStateException("이미 배송완료된 상품은 취소가 불가능 합니다.");
+        }
+        this.setStatus(OrderStatus.CANCEL);
 
+        for(OrderItem orderItem: this.orderItems){
+            orderItem.cancel();
+        }
+    }
 
-
-
-
-
-
+    //==조희 로직==//
+    /**
+     * 전체 주문가격 조회
+     */
+    public int getTotalPrice(){
+        int totalPrice = 0;
+        for(OrderItem orderItem: this.orderItems){
+            totalPrice += orderItem.getTotalPrice();
+        }
+        return totalPrice;
+    }
 
 
 
