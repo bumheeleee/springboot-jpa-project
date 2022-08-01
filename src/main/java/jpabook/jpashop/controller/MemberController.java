@@ -16,7 +16,6 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 public class MemberController {
 
     private final MemberService memberService;
@@ -26,7 +25,6 @@ public class MemberController {
      */
     @GetMapping("/members/new")
     public String createForm(Model model){
-        log.info("createFormController");
         model.addAttribute("memberForm", new MemberForm());
         return "members/createMemberForm";
     }
