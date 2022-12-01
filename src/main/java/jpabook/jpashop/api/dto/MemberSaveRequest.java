@@ -1,10 +1,10 @@
 package jpabook.jpashop.api.dto;
 
 import jpabook.jpashop.domain.Member;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
-public class MemberRequest {
+@Data
+public class MemberSaveRequest {
 
     private String name;
 

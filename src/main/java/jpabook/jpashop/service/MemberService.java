@@ -49,4 +49,14 @@ public class MemberService {
         return memberRepository.findOne(id);
     }
 
+    /**
+     * 커맨드랑 쿼리를 분리한다.
+     * update는 update만, return member를 주게 되면 find하는 느낌이 난다, id 정도만 반환하는것도 괜찮음
+     */
+    @Transactional
+    public void update(Long id, String name){
+        Member member = memberRepository.findOne(id);
+        member.setName(name);
+    }
+
 }

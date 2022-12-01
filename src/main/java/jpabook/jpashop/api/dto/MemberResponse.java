@@ -1,8 +1,8 @@
 package jpabook.jpashop.api.dto;
 
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 public class MemberResponse {
     private Long id;
 
