@@ -26,7 +26,8 @@ public class Member {
     public Member() {
     }
 
-    public Member(String name) {
+    public Member(String name, Address address) {
         this.name = name;
+        this.address = address;
     }
 }
